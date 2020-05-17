@@ -34,3 +34,24 @@ int Solution::cpFact(int A, int B) {
     }
     return 1;
 }
+
+(In this approach, we can use set instead of vector to reduce time)
+
+
+
+
+------------------------------------------------------------------------------------------------------
+
+int Solution::cpFact(int A, int B) {
+    int gcd = __gcd(A,B);
+    if(gcd == 1)
+        return A;
+    while(gcd != 1){
+        A = A/gcd;
+        gcd = __gcd(A,B);
+    }
+    return A;
+}
+
+    
+    
