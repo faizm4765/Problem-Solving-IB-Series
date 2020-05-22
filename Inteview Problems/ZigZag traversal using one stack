@@ -1,0 +1,41 @@
+void zigZagTraversal(Node* root)
+{
+	// Code here
+  
+	queue<Node*> q;
+	stack<Node*> st;
+	st.push(root);
+	int l = 1;    // to keep track of level 
+	while(1){
+	    
+	    int nodes1 = st.size();
+	    int nodes2 = q.size();
+	    if(nodes1 == 0 and nodes2 == 0)
+	        break;
+	
+	   if(l&1){    	   
+	      while(nodes1--){
+	            Node* t = st.top();
+	            st.pop();
+	            cout<<t->data<<" ";
+	            if(t->right)
+	                q.push(t->right);
+	            if(t->left)
+	                q.push(t->left);
+	          }
+	    }else{
+	           while(nodes2--){
+	            Node* t= q.front();
+	            q.pop();
+	            cout<<t->data<<" ";
+	            if(t->right)
+	                st.push(t->right);
+	            if(t->left)
+	                st.push(t->left);
+	     
+	        }
+	       }
+	       l++;
+	    }
+	    
+	}
