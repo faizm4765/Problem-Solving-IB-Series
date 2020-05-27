@@ -1,0 +1,42 @@
+
+/*  Search whether a tree with root node T2 is present in a tree with root node T1 
+
+ A binary tree node
+struct Node
+{
+    int data;
+    struct Node* left;
+    struct Node* right;
+    Node(int x){
+        data = x;
+        left = right = NULL;
+    }
+};
+*/
+
+-------------------------------------------------------------------------------------------------------------
+
+Node* findnode(Node* root,Node* p){
+    if(root!=NULL){
+        if(p->data==root->data)
+            return root;
+        findnode(root->left,p);
+        findnode(root->right,p);
+    }
+}
+
+int check(Node* p,Node* q){
+    if(p==NULL and q==NULL)
+        return 1;
+    if(p==NULL or q==NULL)
+        return 0;
+    return (p->data==q->data and check(p->left,q->left) and check(p->right,q->right));
+}
+
+bool isSubtree(Node* T1, Node* T2) {
+
+    // return 1 if T2 is subtree of T1 else 0
+    
+    Node* node=findnode(T1,T2); // serach T2 in T1 
+    return check(node,T2);
+}
