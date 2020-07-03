@@ -1,0 +1,46 @@
+
+int fsearch(vector<int>a,int k){
+    int l = 0,h = a.size()-1;
+    int index = -1;
+    while(l<=h){
+        int mid = l + (h-l)/2;
+        if(a[mid]<k){
+            l = mid+1;
+        }else if(a[mid] >= k){
+            h = mid-1;
+        }
+        if(a[mid] == k)
+            index = mid;
+    }
+    return index;
+}
+
+int lsearch(vector<int>a,int k){
+    int l = 0,h = a.size()-1;
+    int index = -1;
+    while(l<=h){
+        int mid = l + (h-l)/2;
+        if(a[mid]<=k){
+            l = mid+1;
+        }else if(a[mid] > k){
+            h = mid-1;
+        }
+        if(a[mid] == k)
+            index = mid;
+    }
+    return index;
+}
+
+
+
+
+
+vector<int> Solution::searchRange(const vector<int> &A, int B) {
+    int f = fsearch(A,B);
+    if(f == -1){
+        return {-1,-1};
+    }
+    int l = lsearch(A,B);
+    //cout<<f<<" "<<l;
+    return {f,l};
+}
