@@ -1,0 +1,48 @@
+Print concentric rectangular pattern in a 2d matrix.
+Let us show you some examples to clarify what we mean.
+
+Example 1:
+
+Input: A = 4.
+Output:
+
+4 4 4 4 4 4 4 
+4 3 3 3 3 3 4 
+4 3 2 2 2 3 4 
+4 3 2 1 2 3 4 
+4 3 2 2 2 3 4 
+4 3 3 3 3 3 4 
+4 4 4 4 4 4 4 
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+vector<vector<int> > Solution::prettyPrint(int A) {
+    vector<vector<int>>v(2*A-1,vector<int>(2*A-1));
+    int size = 2*A;
+    //v.resize(size-1);
+    //cout<<v.size()<<v[0].size();
+    if(A == 1){
+        v[0][0] = 1;
+        return v;
+    }
+    int rbeg = 0,cbeg = 0,rend = size-1,cend = size-1;
+    while(rbeg < rend and cbeg < cend){
+       // cout<<rbeg<<" "<<rend<<" "<<cbeg<<" "<<cend<<"\n";
+        for(int i=rbeg;i<rend;i++){
+            v[i][cbeg] = A;
+            v[i][cend-1] = A;
+        }
+        for(int i=cbeg;i<cend;i++){
+            v[rbeg][i] = A;
+            v[rend-1][i] = A;
+        }
+        A--;
+        rbeg++;
+        cbeg++;
+        rend--;
+        cend--;
+    }
+    // cout<<"huli";
+    return v;
+}
