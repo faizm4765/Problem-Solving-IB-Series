@@ -1,0 +1,78 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+bool isValid(int a[],int n,int k,long long int max_pages){
+    
+    int student = 1;
+    long long int sum = 0;
+    
+    for(int i = 0;i < n;i++){
+        sum += a[i];
+        if(sum > max_pages){
+            student++;
+            sum = a[i];
+        }
+        if(student > k)
+            return false;
+    }
+    return true;
+}
+
+long long int solve(int a[],int n,int k){
+    
+    if(k > n)
+        return -1;
+    
+    long long int sum = 0,max = INT_MIN;
+    
+    for(int i = 0;i < n;i++){
+        if(a[i] > max){
+            max = a[i];
+        }
+        sum += a[i];
+    }
+    
+    long long int res = 0;
+    long long int start = max,end = sum;
+    
+    while(start <= end){
+        
+        long long int mid = start + (end - start) / 2;
+        
+        if(isValid(a,n,k,mid) == true){
+            res = mid;
+            end = mid - 1;
+        }else{
+            start = mid + 1;
+        }
+    }
+    return res;
+}
+
+
+int main() {
+	//code
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,k;
+	    cin>>n;
+	    int a[n],i;
+	    
+	    for(i = 0;i < n;i++){
+	        cin>>a[i];
+	    }
+	    
+	    cin>>k;
+	    
+        cout<<solve(a,n,k);
+       
+	    cout<<"\n";
+	}
+	return 0;
+}
