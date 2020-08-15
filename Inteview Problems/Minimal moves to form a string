@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+
+int solve(string s,int len){
+    
+    if(len <= 0)
+        return 0;
+        
+    if(len & 1)
+        return 1 + solve(s.substr(0,len - 1),len - 1);
+    else{
+        int c = 1, f = 0;
+        int i = 0,j = len/2;
+        while(i < (len / 2)){
+            if(s[i] != s[j]){
+                f = 1;
+                break;
+            }
+            i++;j++;
+        }
+        if(f == 1)
+            return 1 + solve(s.substr(0,len - 1),len - 1);
+        return 1 +  solve(s.substr(0,len / 2),len / 2);
+    }
+}
+
+
+int main() {
+	//code
+	
+	int t;
+	cin>>t;
+	
+	while(t--){
+	    
+	    string s;
+	    cin>>s;
+	    
+	    int n = s.length();
+	    
+	    cout<<solve(s,n);
+	    cout<<"\n";
+	    
+	}
+	
+	return 0;
+}
